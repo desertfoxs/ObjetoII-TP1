@@ -18,9 +18,9 @@ public class PruebaTest {
 
         var tarjetaVisa = new Visa("Angel Olivetti", 45823645, 0.3);
 
-        pedido.agregarComida(pizza);
-        pedido.agregarComida(hamburguesaBig);
-        pedido.agregarBebida(cocaCola);
+        pedido.agregar(pizza);
+        pedido.agregar(hamburguesaBig);
+        pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
         assertEquals(7200.0, restaurante.pagarCuenta(pedido, 5, tarjetaVisa));
@@ -33,9 +33,9 @@ public class PruebaTest {
         var tarjetaMasterCard = new MasterCard("Angel Olivetti", 526389742, 0.2);
 
 
-        pedido.agregarComida(pizza);
-        pedido.agregarComida(hamburguesaBig);
-        pedido.agregarBebida(cocaCola);
+        pedido.agregar(pizza);
+        pedido.agregar(hamburguesaBig);
+        pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
         assertEquals(6200, restaurante.pagarCuenta(pedido, 3, tarjetaMasterCard));
@@ -47,9 +47,9 @@ public class PruebaTest {
 
         var tarjetaComarcaPlus = new ComarcaPlus("Angel Olivetti", 26354789, 0.2);
 
-        pedido.agregarComida(pizza);
-        pedido.agregarComida(hamburguesaBig);
-        pedido.agregarBebida(cocaCola);
+        pedido.agregar(pizza);
+        pedido.agregar(hamburguesaBig);
+        pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
         assertEquals(6000, restaurante.pagarCuenta(pedido, 2, tarjetaComarcaPlus));
@@ -61,9 +61,9 @@ public class PruebaTest {
 
         var tajertaViedma = new TajetaSinDescuento("Angel Olivetti", 26354789, 0);
 
-        pedido.agregarComida(pizza);
-        pedido.agregarComida(hamburguesaBig);
-        pedido.agregarBebida(cocaCola);
+        pedido.agregar(pizza);
+        pedido.agregar(hamburguesaBig);
+        pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
         assertEquals(7500, restaurante.pagarCuenta(pedido, 2, tajertaViedma));

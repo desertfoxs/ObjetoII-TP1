@@ -19,7 +19,7 @@ public class Pedido {
         this.propina = 0;
     }
 
-    public void agregarComida(Comida comida) {
+    public void agregar(Comida comida) {
         if (precioTotalComida == 0) {
             if (comidas.containsKey(comida)) {
                 comidas.put(comida, (comidas.get(comida)) + 1);
@@ -29,7 +29,7 @@ public class Pedido {
         }
     }
 
-    public void agregarBebida(Bebida bebida) {
+    public void agregar(Bebida bebida) {
         if (precioTotalComida == 0) {
 
             if (bebidas.containsKey(bebida)) {
