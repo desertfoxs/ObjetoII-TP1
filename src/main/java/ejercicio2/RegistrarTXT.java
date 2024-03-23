@@ -1,13 +1,12 @@
-package ejercicio1;
+package ejercicio2;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class RegistrarDisco implements Registrador {
-
-    String ruta = "C:/Users/desertfoxs/Desktop/txt tp2/historial.txt";
+public class RegistrarTXT implements Registrador2 {
+    String ruta = "C:/Users/desertfoxs/Desktop/txt tp2/historialComidas.txt";
 
     @Override
     public void registrar(String mensaje) {

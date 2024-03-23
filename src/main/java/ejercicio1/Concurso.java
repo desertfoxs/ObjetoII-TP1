@@ -51,8 +51,7 @@ public class Concurso {
                 numinscriptos++;
             }
 
-//          String mensaje = fechaAct.toString() + " -- " + participante.getDNI() + " -- " + ID + "\n";
-            String mensaje = participante.getDNI() + "\n";
+            String mensaje = fechaAct.toString() + " -- " + participante.getDNI() + " -- " + ID + "\n";
 
             this.registro.registrar(mensaje);
 

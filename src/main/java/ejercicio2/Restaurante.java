@@ -1,11 +1,15 @@
 package ejercicio2;
 
+import java.time.LocalDateTime;
+
 public class Restaurante {
 
     private String nombre;
+    private Registrador2 registro;
 
-    public Restaurante(String nombre) {
+    public Restaurante(String nombre, Registrador2 registro) {
         this.nombre = nombre;
+        this.registro = registro;
     }
 
     public double pagarCuenta(Pedido pedido, int propinaPorc, Tarjeta tarjeta) {
@@ -15,12 +19,17 @@ public class Restaurante {
         dineroPagar = tarjeta.aplicarDescuento(pedido.calcularPrecioTotal(), pedido.calcularPrecioBebida()
                 , pedido.calcularPrecioComida());
 
+        LocalDateTime tiempo = LocalDateTime.now();
 
-        System.out.println("Se confirmo el pago de: " + dineroPagar + "$");
-        System.out.println("Se pago una propina de: " + calcularPropina(propinaPorc, (int) dineroPagar) + "$");
+        //PREGUNTAR AL PROFE SI ES EL LUGAR CORRECTO PARA METER EL CODIGO O SINO PONERLO EN "CALCULAR PRECIO TOTAL"
+        String mensaje = tiempo.toString() + " || " + pedido.calcularPrecioTotal() + "\n";
+        this.registro.registrar(mensaje);
 
+        //System.out.println("Se confirmo el pago de: " + dineroPagar + "$");
+        //System.out.println("Se pago una propina de: " + calcularPropina(propinaPorc, (int) dineroPagar) + "$");
+
+        calcularPropina(propinaPorc, (int) dineroPagar);
         return dineroPagar;
-
     }
 
 
