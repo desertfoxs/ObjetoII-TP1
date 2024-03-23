@@ -3,6 +3,7 @@ package ejercicio1;
 public class Participante {
 
     private String nombre;
+
     private int DNI;
     private int puntos;
 
@@ -18,5 +19,9 @@ public class Participante {
 
     public boolean cantPuntos(int punt) {
         return punt == puntos;
+    }
+
+    public int getDNI() {
+        return DNI;
     }
 }
