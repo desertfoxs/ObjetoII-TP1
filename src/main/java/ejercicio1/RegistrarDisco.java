@@ -2,22 +2,28 @@ package ejercicio1;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class RegistrarDisco implements Registrador {
+public class RegistrarDisco implements RegistradorConcurso {
 
-    String ruta = "C:/Users/desertfoxs/Desktop/txt tp2/historial.txt";
+    private String ruta;
+
+    public RegistrarDisco(String url) {
+        ruta = url;
+    }
 
     @Override
     public void registrar(String mensaje) {
-
         try {
-            Files.writeString(Paths.get(ruta),
-                    mensaje, StandardOpenOption.APPEND);
+            if (Files.notExists(Path.of(ruta))) {
+                Files.writeString(Paths.get(ruta), mensaje, StandardOpenOption.CREATE);
+            } else {
+                Files.writeString(Paths.get(ruta), mensaje, StandardOpenOption.APPEND);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error al escribir el archivo: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

@@ -5,18 +5,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class RegistrarTXT implements Registrador2 {
-    String ruta = "C:/Users/desertfoxs/Desktop/txt tp2/historialComidas.txt";
+public class RegistrarTXT implements RegistradorPagos {
+    private String ruta;
+
+    public RegistrarTXT(String ruta) {
+        this.ruta = ruta;
+    }
 
     @Override
     public void registrar(String mensaje) {
-
         try {
             Files.writeString(Paths.get(ruta),
                     mensaje, StandardOpenOption.APPEND);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error al escribir el archivo: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

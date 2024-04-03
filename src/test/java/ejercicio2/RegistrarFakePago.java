@@ -1,6 +1,6 @@
 package ejercicio2;
 
-public class RegistrarFake2 implements Registrador2 {
+public class RegistrarFakePago implements RegistradorPagos {
 
     private boolean invocado = false;
 

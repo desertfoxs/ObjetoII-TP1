@@ -1,6 +1,6 @@
 package ejercicio1;
 
-public interface Registrador {
+public interface RegistradorConcurso {
 
     void registrar(String registro);
 

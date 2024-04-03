@@ -11,25 +11,31 @@ public class Concurso {
     private ArrayList<Participante> inscriptos;
     private LocalDateTime fechaIni;
     private LocalDateTime fechaFin;
-    private Registrador registro;
+    private RegistradorConcurso registro;
+    private EnviarMensaje enviador;
+    private String mensajeEnviar = "usted fue registrado en el concurso";
 
-    public Concurso(int id, String nombre, LocalDateTime fechaFin, LocalDateTime fechaIni, Registrador registro) {
+
+    public Concurso(int id, String nombre, LocalDateTime fechaFin, LocalDateTime fechaIni,
+                    RegistradorConcurso registro, EnviarMensaje enviador) {
 
         ID = id;
         this.nombre = nombre;
         this.fechaFin = fechaFin;
         this.fechaIni = fechaIni;
         this.registro = registro;
+        this.enviador = enviador;
         numinscriptos = 0;
         inscriptos = new ArrayList<Participante>();
 
     }
 
-    public Concurso(int id, String nombre, LocalDateTime fechaFin, Registrador registro) {
+    public Concurso(int id, String nombre, LocalDateTime fechaFin, RegistradorConcurso registro, EnviarMensaje enviador) {
         ID = id;
         this.nombre = nombre;
         this.fechaFin = fechaFin;
         this.registro = registro;
+        this.enviador = enviador;
         this.fechaIni = LocalDateTime.now();
         numinscriptos = 0;
         inscriptos = new ArrayList<Participante>();
@@ -51,9 +57,10 @@ public class Concurso {
                 numinscriptos++;
             }
 
-            String mensaje = fechaAct.toString() + " -- " + participante.getDNI() + " -- " + ID + "\n";
+            String mensaje = fechaAct.toString() + "---" + participante.getDNI() + "---" + ID + "\n";
 
             this.registro.registrar(mensaje);
+            this.enviador.enviar(mensajeEnviar);
 
         } else {
             //imprimir un mensaje diciendo que el concurso ya cerro su fecha caduco

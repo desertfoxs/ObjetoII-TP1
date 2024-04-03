@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 public class Restaurante {
 
     private String nombre;
-    private Registrador2 registro;
+    private RegistradorPagos registro;
 
-    public Restaurante(String nombre, Registrador2 registro) {
+    public Restaurante(String nombre, RegistradorPagos registro) {
         this.nombre = nombre;
         this.registro = registro;
     }
@@ -21,12 +21,10 @@ public class Restaurante {
 
         LocalDateTime tiempo = LocalDateTime.now();
 
-        //PREGUNTAR AL PROFE SI ES EL LUGAR CORRECTO PARA METER EL CODIGO O SINO PONERLO EN "CALCULAR PRECIO TOTAL"
-        String mensaje = tiempo.toString() + " || " + pedido.calcularPrecioTotal() + "\n";
+        
+        String mensaje = tiempo.toString() + "---" + pedido.calcularPrecioTotal() + "\n";
         this.registro.registrar(mensaje);
 
-        //System.out.println("Se confirmo el pago de: " + dineroPagar + "$");
-        //System.out.println("Se pago una propina de: " + calcularPropina(propinaPorc, (int) dineroPagar) + "$");
 
         calcularPropina(propinaPorc, (int) dineroPagar);
         return dineroPagar;

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PruebaTest {
 
-
-    Restaurante restaurante = new Restaurante("Roma", new RegistrarTXT());
+    String ruta = "C:/Users/desertfoxs/Desktop/txt tp2/historialComidas.txt";
+    Restaurante restaurante = new Restaurante("Roma", new RegistrarTXT(ruta));
 
     Pedido pedido = new Pedido();
     Comida pizza = new Comida("pizza 4queso", 2500);
@@ -18,8 +18,8 @@ public class PruebaTest {
     @Test
     public void pagarConVisaFake() {
 
-        var fake = new RegistrarFake2();
-        Restaurante restauranteFake = new Restaurante("fake", fake);
+        var registrarFake = new RegistrarFakePago();
+        Restaurante restaurante = new Restaurante("fake", registrarFake);
 
         var tarjetaVisa = new Visa("Angel Olivetti", 45823645, 0.3);
 
@@ -28,15 +28,15 @@ public class PruebaTest {
         pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
-        assertEquals(7200.0, restauranteFake.pagarCuenta(pedido, 5, tarjetaVisa));
-        assertEquals(true, fake.fueInvocado());
+        assertEquals(7200.0, restaurante.pagarCuenta(pedido, 5, tarjetaVisa));
+        assertEquals(true, registrarFake.fueInvocado());
     }
 
     @Test
     public void pagarConMasterCardFake() {
 
-        var fake = new RegistrarFake2();
-        Restaurante restauranteFake = new Restaurante("fake", fake);
+        var registrarFake = new RegistrarFakePago();
+        Restaurante restaurante = new Restaurante("fake", registrarFake);
 
         var tarjetaMasterCard = new MasterCard("Angel Olivetti", 526389742, 0.2);
 
@@ -45,15 +45,15 @@ public class PruebaTest {
         pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
-        assertEquals(6200, restauranteFake.pagarCuenta(pedido, 3, tarjetaMasterCard));
-        assertEquals(true, fake.fueInvocado());
+        assertEquals(6200, restaurante.pagarCuenta(pedido, 3, tarjetaMasterCard));
+        assertEquals(true, registrarFake.fueInvocado());
     }
 
     @Test
     public void pagarConComarcaPlusFake() {
 
-        var fake = new RegistrarFake2();
-        Restaurante restauranteFake = new Restaurante("fake", fake);
+        var registrarFake = new RegistrarFakePago();
+        Restaurante restaurante = new Restaurante("fake", registrarFake);
 
         var tarjetaComarcaPlus = new ComarcaPlus("Angel Olivetti", 26354789, 0.2);
 
@@ -62,8 +62,8 @@ public class PruebaTest {
         pedido.agregar(cocaCola);
 
         assertEquals(7500, pedido.calcularPrecioTotal());
-        assertEquals(6000, restauranteFake.pagarCuenta(pedido, 2, tarjetaComarcaPlus));
-        assertEquals(true, fake.fueInvocado());
+        assertEquals(6000, restaurante.pagarCuenta(pedido, 2, tarjetaComarcaPlus));
+        assertEquals(true, registrarFake.fueInvocado());
     }
 
     @Test
@@ -82,4 +82,22 @@ public class PruebaTest {
                 restaurante.pagarCuenta(pedido, 0, tajertaViedma)));
 
     }
+
+    @Test
+    public void pagarConVisaBD() {
+
+        var tarjetaVisa = new Visa("Angel Olivetti", 45823645, 0.3);
+        Restaurante restauranteBD = new Restaurante("roma", new RegistrarBaseDatoPago());
+
+        pedido.agregar(pizza);
+        pedido.agregar(hamburguesaBig);
+        pedido.agregar(cocaCola);
+
+        restauranteBD.pagarCuenta(pedido, 2, tarjetaVisa);
+
+        assertEquals(7500, pedido.calcularPrecioTotal());
+        assertEquals(7200.0, restaurante.pagarCuenta(pedido, 5, tarjetaVisa));
+
+    }
+
 }
